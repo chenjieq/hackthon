@@ -1,0 +1,52 @@
+version: '3'
+#networks:
+#  default:
+#    driver: bridge
+services:
+  eureka:
+    container_name: eureka
+    image: springboot/eureka
+    restart: always
+#    networks:
+#      - default
+    ports:
+      - "8761:8761"
+  mysql:
+    container_name: mysql
+    image:  mysql
+    environment:
+      MYSQL_DATABASE: springboot
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+#    networks:
+#      - default
+    ports:
+      - "3306:3306"
+    restart: always
+
+  rabbitmq:
+    container_name: rabbitmq
+    image:  rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+
+#  restSpringBoot:
+#    container_name: restspring1
+#    image: springboot/restspring1
+#    restart: always
+##    networks:
+##      - default
+#    ports:
+#      - "8013:8013"
+#    depends_on:
+#      - "eureka"
+#      - "mysql"
+#    links:
+#      - "eureka:eureka"
+#      - "mysql:mysql"
+
